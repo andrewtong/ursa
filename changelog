@@ -1,0 +1,9 @@
+v1.1
+
+Changes from v1.0 to v1.1
+Letter swapping between strings is now performed correctly
+
+Minimum partition length when splitting the string pattern is going to be the of length n, where n is the length of the
+substring.  This is important because it allows the program to check for words that have two instances of the same letter
+accurately (e.x. firefighter) without returning a imperfect score.
+
