@@ -1,4 +1,4 @@
-# ursa
+# ursa v1.0 - currently a work in progress
 
 ##**Theory**
 The concept of ursa is to perform fast fuzzy string matches by applying approximation techniques to minimize the time 
