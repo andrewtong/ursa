@@ -36,7 +36,9 @@ is a true match.
 
 ##**Performance**
 The following demonstrates how ursa is to operate for a string pattern and a given substring.
+
 String pattern: 'The red apple is ripe and steady.'
+
 Substring: 'ready'
 
 The program will notice that there are two words that start with 'r'
