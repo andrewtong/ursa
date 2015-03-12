@@ -13,14 +13,15 @@ Understanding this concept proposes a number of implications that can incredibly
 series of tests, I have determined that there is approximately a 50% difference threshold between letters within 
 two words such that the said two words are indistinguishable.
 
-For example, the word 'distinguish' can be claimed to be unrecognizable from 'dustkngosh'.  **By applying this theory, I am
-able to compare words only knowing the length of the 'correct' word, since incorrect words reveal themselves beyond a 
-determined score threshold.  The benefit of this is that I am able to apply partioning methods at linear speeds (at the
-most optimal case) to significantly expedite runtime since the algorithm never has to search for a sequence, circumventing 
-the usage of sequence matching algorithms that run in polynomial time!.**
+For example, the word 'distinguish' can be claimed to be unrecognizable from 'dustkngosh'.  URSA will attempt to 
+reconstruct the substring by predicting errors within the string pattern and comparing the sum of errors to a calculated
+threshold.  **By applying this theory, I am able to compare words only knowing the length of the 'correct' word, since
+incorrect words are filtered out beyond a determined score threshold.  The benefit of this is that I am able to apply
+partioning methods at linear speeds (at the most optimal case) to significantly expedite runtime since the algorithm never
+has to search for a sequence, circumventing the usage of sequence matching algorithms that run in polynomial time!.**
 
 ##**So what are the consequences of this?**
-URSA is capable of running at extreme speeds compared to various other string matching algorithms:
+URSA is capable of running at fast speeds compared to various other string matching algorithms:
 *ex to be shown*
 
 The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
@@ -32,7 +33,7 @@ multiple errors, as opposed to the commonly seen linear scoring system.
 
 ##**What Can Be Improved on URSA**
 While URSA has a plethora of benefits, it is still incredibly new and due to the numerous amount of fuzzy string cases
-that may possibly exist, I am almost certain that URSA is still at its most optimal form.  That being said, here are a few
+that may possibly exist, I am almost certain that URSA is still far from its optimal form.  That being said, here are a few
 current issues with URSA that are seeking to be addressed in the future.
 
 - Due to the partitioning method, it is incredibly difficult to remove words that have been previously searched.  A given
