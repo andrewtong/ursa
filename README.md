@@ -15,9 +15,9 @@ two words such that the said two words are indistinguishable.
 
 For example, the word 'distinguish' can be claimed to be unrecognizable from 'dustkngosh'.  **By applying this theory, I am
 able to compare words only knowing the length of the 'correct' word, since incorrect words reveal themselves beyond a 
-determined score threshold.  The benefit of this is that I am able to apply partioning methods at linear speeds to
-significantly expedite runtime since the algorithm never has to search for a sequence, circumventing the usage of sequence
-matching algorithms that run in polynomial time!.**
+determined score threshold.  The benefit of this is that I am able to apply partioning methods at linear speeds (at the
+most optimal case) to significantly expedite runtime since the algorithm never has to search for a sequence, circumventing 
+the usage of sequence matching algorithms that run in polynomial time!.**
 
 ##**So what are the consequences of this?**
 URSA is capable of running at extreme speeds compared to various other string matching algorithms:
