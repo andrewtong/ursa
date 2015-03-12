@@ -9,54 +9,35 @@ behind this is
 **The likelihood of any pair of words matching exponentially decreases with increasing number of differences between the said
 two words.**  
 
-Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  For example,
-assume a user is attempting to check if the substring 'computer' is contained within the sentence 'My computer is new.'.  
+Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  From a 
+series of tests, I have determined that there is approximately a 50% difference threshold between letters within 
+two words such that the said two words are indistinguishable.
 
-As the substring 'computer' becomes increasingly mispelled,
-
-- Colputer : This can be easily assumed as a mispelling of 'computer'.
-- Colkuter
-- Colkwter : This is increasingly difficult to determine that the original intent of the word was to be 'computer'
-- Colkwber
-- Colkwbmr : This is almost impossible to determine that the original intent of the word was to be 'computer'.
-
-the substring eventually hits a threshold where it becomes so deformed that is is no longer recognizable from the original 
-word. This threshold is noticable once a word differs from another by approximately 50% of its letters.  
+For example, the word 'distinguish' can be claimed to be unrecognizable from 'dustkngosh'.  **By applying this theory, I am
+able to compare words only knowing the length of the 'correct' word, since incorrect words reveal themselves beyond a 
+determined score threshold.  The benefit of this is that I am able to apply partioning methods at linear speeds to
+significantly expedite runtime since the algorithm never has to search for a sequence, circumventing the usage of sequence
+matching algorithms that run in polynomial time!.**
 
 ##**So what are the consequences of this?**
-Traditional string matches perform a computation of the Levenshtein distance to determine the proximity between two given 
-words.  For a string pattern of length 'm' and a substring of length 'n', the time complexity of the Levenshtein distance
-is O(mn).  However, applying the 50% error soft cap as previously shown approximately reduces the time complexity to O(mn/2),
-which may make a significant difference in realistic scenarios.  
+URSA is capable of running at extreme speeds compared to various other string matching algorithms:
+*ex to be shown*
 
-However, it is possible to further optimize this by removing words that are deemed incorrect.  Ursa is designed to initially
-perform fast operations to weed out words that are certainly incorrect in order to reduce the string pattern that needs to be
-scanned.  If it does find a potential match, it will then perform a more accurate check to determine whether the substring
-is a true match.
+The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
+*second example*
 
-##**Performance**
-The following demonstrates how ursa is to operate for a string pattern and a given substring.
+URSA's scoring system is incredibly detailed, being lenient on words with minimal errors, while harsher on words with 
+multiple errors, as opposed to the commonly seen linear scoring system.
+*third example*
 
-String pattern: 'The red apple is ripe and steady.'
+##**What Can Be Improved on URSA**
+While URSA has a plethora of benefits, it is still incredibly new and due to the numerous amount of fuzzy string cases
+that may possibly exist, I am almost certain that URSA is still at its most optimal form.  That being said, here are a few
+current issues with URSA that are seeking to be addressed in the future.
 
-Substring: 'ready'
-
-The program will notice that there are two words that start with 'r'
-- The **r**ed apple is **r**ipe and steady.
-So there are two potential matches, but no certain matches, so we move to the next substring indexes
-- The **re**d apple is **r**ipe and steady.
-So 'red' appears to be a match, and will be analyzed to check whether it is a match.  The software will realize that 'red' is
-too poor of a match, and decide to remove it.  'ripe' on the other hand, will not be analyzed since it will be marked as a 
-poor matches once it the next indexes are matched.  Because of this, 'red' and 'ripe' will be removed and the string pattern
-will be 
-- 'The apple is and steady.'
-Because of this, we scan the next substring index 'e' in the main pattern
-- 'The apple is and st**e**ady.'
-Following a similar process, the program will notice that 'eady' is a good match to 'ready', but with one letter off.  It 
-will return this as a match but with an imperfect, but high score.
-
-Note that if 'steady' was never in the string pattern, if no solid match was found after the substring index 'a', then the
-program will stop searching since it exceeds the 50% error threshold there is an extremely high chance that there will be no
-matches between the substring and the string pattern.
+- Due to the partitioning method, it is incredibly difficult to remove words that have been previously searched.  A given
+  substring may be spaced out across a sentence such that single word removal is not adequate for URSA's performance.
+- URSA's scoring system is not perfect.  While it is more punishing toward words that have a higher number of errors, 
+  I am not positive whether the scoring system is at the current moment a matching pair with the score parsing algorithm.
 
 
