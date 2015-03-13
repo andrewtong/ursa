@@ -1,7 +1,23 @@
-v1.1
+#v2.0
 
-Changes from v1.0 to v1.1
-Letter swapping between strings is now performed correctly
+Changes from v1.0 to v2.0
+URSA can now perform letter swapping, find missing letters, remove extra letters, or perform a combination of any of the above
+intelligently! It attempts to 'correct' potential word candidates and utilizes a detailed scoring system to determine to keep
+track of the number of changes made.  Too many changes and a word no longer becomes a candidiate, but if the score is low enough
+it will be recognized as the correct word.
+
+Scoring system now adjusts to the severity of the mistake, and scores big mistakes (i.e. missing two letters) significantly 
+higher than minor mistakes ('letter swap where both letters are correct').  URSA can also now correctly score words that are
+missing the first few letters correctly, and when performing the word correction it will take into account missing letters
+at the start.  (e.x. 'attern', 'pattern' : The missing p is accounted for at the start and does transfer over resulting in
+an incorrect scoring.)
+
+Runtime sigificantly expedited through a number of corrections to reduce redundancies, URSA is capable of predicting accurately
+and early on when a word will be incorrect and is quick to remove it.
+
+Majority of indexing errors have been fixed, and indexing errors are accounted for and properly scored for! (They only
+occur when the length of the word in the string pattern is shortern than the length of the substring and are completely
+accounted for when computing the likeliness of any two words matching.)
 
 Minimum partition length when splitting the string pattern is going to be the of length n, where n is the length of the
 substring.  This is important because it allows the program to check for words that have two instances of the same letter
