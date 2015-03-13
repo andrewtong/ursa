@@ -1,4 +1,5 @@
-# ursa v1.0 - currently a work in progress
+# ursa v2.0
+URSA is now functional for usage!
 
 ##**Theory**
 The concept of ursa is to perform fast fuzzy string matches by applying approximation techniques to minimize the time 
@@ -9,54 +10,86 @@ behind this is
 **The likelihood of any pair of words matching exponentially decreases with increasing number of differences between the said
 two words.**  
 
-Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  For example,
-assume a user is attempting to check if the substring 'computer' is contained within the sentence 'My computer is new.'.  
+Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  From a 
+series of tests, I have determined that there is approximately a 50% difference threshold between letters within 
+two words such that the said two words are indistinguishable.
 
-As the substring 'computer' becomes increasingly mispelled,
-
-- Colputer : This can be easily assumed as a mispelling of 'computer'.
-- Colkuter
-- Colkwter : This is increasingly difficult to determine that the original intent of the word was to be 'computer'
-- Colkwber
-- Colkwbmr : This is almost impossible to determine that the original intent of the word was to be 'computer'.
-
-the substring eventually hits a threshold where it becomes so deformed that is is no longer recognizable from the original 
-word. This threshold is noticable once a word differs from another by approximately 50% of its letters.  
+For example, the word 'distinguish' can be claimed to be unrecognizable from 'dustkngosh'.  URSA will attempt to 
+reconstruct the substring by predicting errors within the string pattern and comparing the sum of errors to a calculated
+threshold.  **By applying this theory, I am able to compare words only knowing the length of the 'correct' word, since
+incorrect words are filtered out beyond a determined score threshold.  The benefit of this is that I am able to apply
+partioning methods at linear speeds (at the most optimal case) to significantly expedite runtime since the algorithm never
+has to search for a sequence, circumventing the usage of sequence matching algorithms that run in polynomial time!.**
 
 ##**So what are the consequences of this?**
-Traditional string matches perform a computation of the Levenshtein distance to determine the proximity between two given 
-words.  For a string pattern of length 'm' and a substring of length 'n', the time complexity of the Levenshtein distance
-is O(mn).  However, applying the 50% error soft cap as previously shown approximately reduces the time complexity to O(mn/2),
-which may make a significant difference in realistic scenarios.  
+URSA is capable of running at fast speeds compared to various other string matching algorithms:
 
-However, it is possible to further optimize this by removing words that are deemed incorrect.  Ursa is designed to initially
-perform fast operations to weed out words that are certainly incorrect in order to reduce the string pattern that needs to be
-scanned.  If it does find a potential match, it will then perform a more accurate check to determine whether the substring
-is a true match.
+```
+%timeit compare('The quick brown fox jmuped over the lazy dog.','jumped')
+1000 loops, best of 3: 307 μs per loop
+```
 
-##**Performance**
-The following demonstrates how ursa is to operate for a string pattern and a given substring.
+```
+%timeit compare('Performance varies minimally with the complexity of the input, despite the length of the string pattern.','complexity')
+1000 loops, best of 3: 545 μs per loop
+```
 
-String pattern: 'The red apple is ripe and steady.'
+```
+%timeit compare('Sally sells seashells down by the seaschore.','seashore')
+1000 loops, best of 3: 758 μs per loop
+```
 
-Substring: 'ready'
+```
+%timeit compare('Sesahells are slod down by the seacshore by Slally.,'seashore')
+1000 loops, best of 3: 597 μs per loop
+```
 
-The program will notice that there are two words that start with 'r'
-- The **r**ed apple is **r**ipe and steady.
-So there are two potential matches, but no certain matches, so we move to the next substring indexes
-- The **re**d apple is **r**ipe and steady.
-So 'red' appears to be a match, and will be analyzed to check whether it is a match.  The software will realize that 'red' is
-too poor of a match, and decide to remove it.  'ripe' on the other hand, will not be analyzed since it will be marked as a 
-poor matches once it the next indexes are matched.  Because of this, 'red' and 'ripe' will be removed and the string pattern
-will be 
-- 'The apple is and steady.'
-Because of this, we scan the next substring index 'e' in the main pattern
-- 'The apple is and st**e**ady.'
-Following a similar process, the program will notice that 'eady' is a good match to 'ready', but with one letter off.  It 
-will return this as a match but with an imperfect, but high score.
+These tests were done using IPython, and the takeaway from this is that runtime is *highly* dependent on the partioning!.
+If you look at the 3rd and 4th tests, the 4th tests takes shorter because 'seashore' is partioned as the 3rd possibility
+as opposed to the 4th.  Despite having multiple words that start with the same letter, URSA is capable of computing results
+without significant increases in runtime.
 
-Note that if 'steady' was never in the string pattern, if no solid match was found after the substring index 'a', then the
-program will stop searching since it exceeds the 50% error threshold there is an extremely high chance that there will be no
-matches between the substring and the string pattern.
+The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
+
+```
+compare('W o r d s can be s p a c e d by almost any amount with almost no peanlty','spaced')
+Match found to spaced with a certainty of 100, reconstructed word is spaced.
+```
+
+```
+compare('Ursa can handle cases where spam may be qwertyupresent.','present')
+Match found to present with a certainty of 100, reconstructed word is present.
+```
+
+```
+compare('Scenarios where letters may be misig are fine as well!','missing')
+Match found to missing with a certainty of 78, reconstructed word is missing.
+```
+
+```
+compare('Letters that are swpapde are no problem either.','swapped')
+Match found to swapped with a certainty of 85, reconstructed word is swapped.
+```
+
+```
+compare('Even the most complex of istkeas can be recognized by URSA.','mistakes')
+Match found to mistakes with a certainty of 71, reconstructed word is mistakes.
+```
+
+Whether it may be an incorrect, swapped, missing letters or a combination of all, URSA is capable of solving fuzzy string
+matches without issue, and scores approximately depending on the likeliness between the correctly and incorrectly spelled
+word.
+
+##**What Can Be Improved on URSA**
+While URSA has a plethora of benefits, it is still incredibly new and due to the numerous amount of fuzzy string cases
+that may possibly exist, I am almost certain that URSA is still far from its optimal form.  That being said, here are a few
+current issues with URSA that are seeking to be addressed in the future.
+
+- Due to the partitioning method, it is incredibly difficult to remove words that have been previously searched.  A given
+  substring may be spaced out across a sentence such that single word removal is not adequate for URSA's performance.
+- URSA's scoring system is not perfect.  While it is more punishing toward words that have a higher number of errors, 
+  I am not positive whether the scoring system is at the current moment a matching pair with the score parsing algorithm.
+- Currently URSA does not support multiple word input, or prefixes like 'not'/'un'/'im' that can easily change the meaning
+  of a word.
 
 
