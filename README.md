@@ -23,6 +23,7 @@ has to search for a sequence, circumventing the usage of sequence matching algor
 
 ##**So what are the consequences of this?**
 URSA is capable of running at fast speeds compared to various other string matching algorithms:
+Note times are registered as of the v2.0 patch!
 
 ```
 %timeit compare('The quick brown fox jmuped over the lazy dog.','jumped')
@@ -47,7 +48,10 @@ URSA is capable of running at fast speeds compared to various other string match
 These tests were done using IPython, and the takeaway from this is that runtime is *highly* dependent on the partioning!.
 If you look at the 3rd and 4th tests, the 4th tests takes shorter because 'seashore' is partioned as the 3rd possibility
 as opposed to the 4th.  Despite having multiple words that start with the same letter, URSA is capable of computing results
-without significant increases in runtime.
+without significant increases in runtime.  
+
+I **suspect** that the runtime is highly dependent on O(m + jn), where m is the length of the string pattern, j is the number
+of partitions the algorithm needs to count, and n is the remainder substring length.  For almost any case, m >= jn.
 
 The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
 
