@@ -1,4 +1,4 @@
-# ursa v2.0
+# ursa v3.0
 URSA is now functional for usage!
 
 ##**Theory**
