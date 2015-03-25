@@ -50,9 +50,6 @@ If you look at the 3rd and 4th tests, the 4th tests takes shorter because 'seash
 as opposed to the 4th.  Despite having multiple words that start with the same letter, URSA is capable of computing results
 without significant increases in runtime.  
 
-I **suspect** that the runtime is highly dependent on O(m + jn), where m is the length of the string pattern, j is the number
-of partitions the algorithm needs to count, and n is the remainder substring length.  For almost any case, m >= jn.
-
 The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
 
 ```
