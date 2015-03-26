@@ -1,4 +1,4 @@
-# ursa v2.0
+# ursa v3.0
 URSA is now functional for usage!
 
 ##**Theory**
@@ -7,8 +7,8 @@ complexity associated with the algorithm.  The concept behind this is simple, bu
 how the algorithm numerically "rationalizes" to determine whether a two words are potential matches.  The encompassing theory
 behind this is
 
-**The likelihood of any pair of words matching exponentially decreases with increasing number of differences between the said
-two words.**  
+*The likelihood of any pair of words matching exponentially decreases with an increasing number of differences between the 
+said two words.* 
 
 Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  From a 
 series of tests, I have determined that there is approximately a 50% difference threshold between letters within 
@@ -23,6 +23,7 @@ has to search for a sequence, circumventing the usage of sequence matching algor
 
 ##**So what are the consequences of this?**
 URSA is capable of running at fast speeds compared to various other string matching algorithms:
+Note times are registered as of the v2.0 patch!
 
 ```
 %timeit compare('The quick brown fox jmuped over the lazy dog.','jumped')
@@ -47,7 +48,7 @@ URSA is capable of running at fast speeds compared to various other string match
 These tests were done using IPython, and the takeaway from this is that runtime is *highly* dependent on the partioning!.
 If you look at the 3rd and 4th tests, the 4th tests takes shorter because 'seashore' is partioned as the 3rd possibility
 as opposed to the 4th.  Despite having multiple words that start with the same letter, URSA is capable of computing results
-without significant increases in runtime.
+without significant increases in runtime.  
 
 The algorithm is capable of handling extreme cases of fuzzy string matches like no other algorithm can:
 
