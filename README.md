@@ -7,8 +7,8 @@ complexity associated with the algorithm.  The concept behind this is simple, bu
 how the algorithm numerically "rationalizes" to determine whether a two words are potential matches.  The encompassing theory
 behind this is
 
-**The likelihood of any pair of words matching exponentially decreases with increasing number of differences between the said
-two words.**  
+*The likelihood of any pair of words matching exponentially decreases with an increasing number of differences between the 
+said two words.* 
 
 Understanding this concept proposes a number of implications that can incredibly expedite fuzzy string matches.  From a 
 series of tests, I have determined that there is approximately a 50% difference threshold between letters within 
