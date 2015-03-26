@@ -1,9 +1,6 @@
 #v3.0
 
-Changes from v2.0 to v3.0
-Many indexing errors have been corrected. One of the major bugs was that occasionally a 'double index jump' would occur because
-the index counter would increment by one, while the substring length would decrease by one, resulting in substr[index] being 
-one letter ahead. This was corrected and there accuracy checks for latter letter partitions should now be a lot more accurate.
+TO DO
 
 Scoring system altered to act logarithmically.  What this means is that when the program registers a score value of for 
 example '70', then its likely going to be a good match.  That being said, a score of '50' to '60' is to be registered as a
@@ -11,6 +8,12 @@ questionable match, and is likely to be incorrect.  What this means is that this
 significant jump than say from '80' to '100'.  To adjust for this, I wanted to reduce the number of midranged scores and
 put out a more certain 'yes' or 'no' type answer.  The scoring system is still a bit imperfect, but I feel that this one
 works a bit better.
+*The scoring system is being worked on URSA-enhanced, once a good match is found, it will be implemented onto URSA.*
+
+Changes from v2.0 to v3.0
+Many indexing errors have been corrected. One of the major bugs was that occasionally a 'double index jump' would occur because
+the index counter would increment by one, while the substring length would decrease by one, resulting in substr[index] being 
+one letter ahead. This was corrected and there accuracy checks for latter letter partitions should now be a lot more accurate.
 
 Because URSA is almost fully functional, URSA-enhanced will start to be worked on to attempt to increase performance.  See
 the URSA-enhanced repository for the direction of that project.
