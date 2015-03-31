@@ -1,4 +1,4 @@
-# ursa v3.0
+# ursa v3.1
 URSA is now functional for usage!
 
 ##**Theory**
@@ -23,7 +23,7 @@ has to search for a sequence, circumventing the usage of sequence matching algor
 
 ##**So what are the consequences of this?**
 URSA is capable of running at fast speeds compared to various other string matching algorithms:
-Note times are registered as of the v2.0 patch!
+Note times and scores are computed as of the v2.0 patch! (current patch is v3.1, but results should vary minimally!)
 
 ```
 %timeit compare('The quick brown fox jmuped over the lazy dog.','jumped')
@@ -81,6 +81,21 @@ Whether it may be an incorrect, swapped, missing letters or a combination of all
 matches without issue, and scores approximately depending on the likeliness between the correctly and incorrectly spelled
 word.
 
+##**Scoring System of URSA**
+One of the main goals of URSA once it was functional was to adapt a scoring system that provides meaningful score values to 
+user.  Scores should indicate a definitive yes or no and optimally minimize in the mid range zone.  I define the mid range
+zone that encompasses scores between approximately 40-65, where there is no definitive answer as to whether the word is 
+a true match or not.  Originally scores are computed on a linear based function, where for example, a 4 letter word with 
+a single incorrect letter may receive a score between 75 to 85, depending on the severity of the error. In addition, scores 
+that did not exceed a threshold were automatically deemed as incorrect.  The original threshold was at 20, but has been 
+bumped up to 25 with the introduction of the new scoring system.
+
+The graph below depicts how the new scoring system works.  The purpose of adjusted the score is to return an increased 
+quantity of higher and lower scores while minimizing the quantity of 'mid-ranged' scores as previously discussed due to 
+their ambiguous nature.
+
+![ursascoringimg](https://cloud.githubusercontent.com/assets/10404525/6912202/72a095f0-d721-11e4-8d79-6dc73fc9e8d7.png)
+
 ##**What Can Be Improved on URSA**
 While URSA has a plethora of benefits, it is still incredibly new and due to the numerous amount of fuzzy string cases
 that may possibly exist, I am almost certain that URSA is still far from its optimal form.  That being said, here are a few
@@ -88,8 +103,6 @@ current issues with URSA that are seeking to be addressed in the future.
 
 - Due to the partitioning method, it is incredibly difficult to remove words that have been previously searched.  A given
   substring may be spaced out across a sentence such that single word removal is not adequate for URSA's performance.
-- URSA's scoring system is not perfect.  While it is more punishing toward words that have a higher number of errors, 
-  I am not positive whether the scoring system is at the current moment a matching pair with the score parsing algorithm.
 - Currently URSA does not support multiple word input, or prefixes like 'not'/'un'/'im' that can easily change the meaning
   of a word.
 
