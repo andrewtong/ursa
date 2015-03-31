@@ -37,11 +37,17 @@ def compare(main, substring):
         result = checklist(dividedlist, substring[k:], 0, scores)
         for key,v in result.items():
             if key is not None:
-                if int(v) > 20:
-                    print('Match found to ' + substring + ' with a certainty of ' + str(int(v)) + ', reconstructed word is ' + substring[:k] + key +'.')
+                if int(v) > 25:
+                    adjustedscore = -0.1*abs((int(v)-100))**1.6 + 100
+                    #Adjusted score is the score that better represents the accuracy of the predicted matched word.
+                    #The purpose of using the adjusted score is that the inverse exponential portion makes the scoring such that
+                    #lower and higher end scores are more likely to be output, which give a definitive answer, while
+                    #medium-ranged scores that are not exactly very informative of how accurate the word is are distrubuted
+                    #less often.
+                    print('Match found to ' + substring + ' with a certainty of ' + str(int(adjustedscore)) + ', reconstructed word is ' + substring[:k] + key +'.')
                     return
         if k > int(len(substring)/2):
-            print('No matches were found to match ' + substring + ' with reasonable certainty.')
+            print('No matches were found to ' + substring + ' with reasonable certainty.')
             return     
         
        
@@ -234,6 +240,7 @@ def checkaccuracy(words, substr, index, score):
             wordsl.insert(i,substr[i])
             words = ''.join(wordsl)
             score += 15
+
     rating = 100*(1 - score/(len(substr)*20))
     #Now the matching string needs to be found
     matcher = words[0:len(substr)]
