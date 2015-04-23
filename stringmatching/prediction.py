@@ -49,7 +49,29 @@ def compare(main, substring):
         if k > int(len(substring)/2):
             print('No matches were found to ' + substring + ' with reasonable certainty.')
             return     
-        
+ 
+ def score(main, substring):
+    #score functions identically to compare, except it returns the integer value that represents the likeliness between
+    #the two strings as opposed to a string value.
+    main = filterstringpattern(main)
+    for k in range(0, len(substring)):
+        dividedlist = divlist(main, substring[k], len(substring))
+        scores = [k*10]*len(dividedlist)
+        result = checklist(dividedlist, substring[k:], 0, scores)
+        for key,v in result.items():
+            if key is not None:
+                if int(v) > 25:
+                    adjustedscore = -0.1*abs((int(v)-100))**1.6 + 100
+                    #Adjusted score is the score that better represents the accuracy of the predicted matched word.
+                    #The purpose of using the adjusted score is that the inverse exponential portion makes the scoring such that
+                    #lower and higher end scores are more likely to be output, which give a definitive answer, while
+                    #medium-ranged scores that are not exactly very informative of how accurate the word is are distrubuted
+                    #less often.
+                    print(int(adjustedscore))
+                    return
+        if k > int(len(substring)/2):
+            print(0)
+            return        
        
 #This function filters out irrelevant characters from the string pattern
 def filterstringpattern(strg):

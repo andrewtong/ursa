@@ -81,6 +81,14 @@ Whether it may be an incorrect, swapped, missing letters or a combination of all
 matches without issue, and scores approximately depending on the likeliness between the correctly and incorrectly spelled
 word.
 
+Of course, if you would like only the integer value to be returned from the algorithm, a secondary function 'score' can be 
+used.  This is primarily useful if URSA is to function as a module.
+
+```
+score('A secondary fnctin comparescore can be used to exclusively retrieve the likeliness between two strings.', 'function')
+88
+```
+
 ##**Scoring System of URSA**
 One of the main goals of URSA once it was functional was to adapt a scoring system that provides meaningful score values to 
 user.  Scores should indicate a definitive yes or no and optimally minimize in the mid range zone.  I define the mid range
