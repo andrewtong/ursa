@@ -1,6 +1,13 @@
-#v3.0
+#v3.1.1
 
-TO DO
+Changes from v3.1 to v3.1.1
+
+Secondary function 'score' added to compare a string pattern and substring.  The function score operates exactly like compare,
+but instead of returning a string, it will exclusively return the integer value that represents the likeliness between
+the two strings.  The function is useful this algorithm is to act as a module and the returned integer value is to be parsed.
+(For example, checking if the returned score is greater than 70.)
+
+Changes from v3.0 to v3.1
 
 Scoring system altered to act logarithmically.  What this means is that when the program registers a score value of for 
 example '70', then its likely going to be a good match.  That being said, a score of '50' to '60' is to be registered as a
