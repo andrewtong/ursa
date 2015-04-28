@@ -1,4 +1,4 @@
-# ursa v3.1.1
+# ursa v3.1.2
 URSA is now functional for usage!
 
 ##**Theory**
@@ -23,7 +23,7 @@ has to search for a sequence, circumventing the usage of sequence matching algor
 
 ##**So what are the consequences of this?**
 URSA is capable of running at fast speeds compared to various other string matching algorithms:
-Note times and scores are computed as of the v2.0 patch! (current patch is v3.1, but results should vary minimally!)
+Note times and scores are computed as of the v2.0 patch! (current patch is v3.1.2, but results should vary minimally!)
 
 ```
 %timeit compare('The quick brown fox jmuped over the lazy dog.','jumped')
@@ -85,7 +85,7 @@ Of course, if you would like only the integer value to be returned from the algo
 used.  This is primarily useful if URSA is to function as a module.
 
 ```
-score('A secondary fnctin comparescore can be used to exclusively retrieve the likeliness between two strings.', 'function')
+print(score('A secondary fnctin score can be used to exclusively retrieve the likeliness between two strings.', 'function'))
 88
 ```
 
