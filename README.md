@@ -1,6 +1,9 @@
 # ursa v3.1.2
 URSA is now functional for usage!
 
+A second project, URSA-enhanced is being worked on currently, with the focus of solving fuzzy string matches in linear time.
+See the code and theory behind URSA-enhanced at https://github.com/andrewtong/ursa-enhanced
+
 ##**Theory**
 The concept of ursa is to perform fast fuzzy string matches by applying approximation techniques to minimize the time 
 complexity associated with the algorithm.  The concept behind this is simple, but the precision of this program varies with 
