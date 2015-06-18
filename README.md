@@ -44,7 +44,7 @@ Note times and scores are computed as of the v2.0 patch! (current patch is v3.1.
 ```
 
 ```
-%timeit compare('Sesahells are slod down by the seacshore by Slally.,'seashore')
+%timeit compare('Sesahells are slod down by the seacshore by Slally.','seashore')
 1000 loops, best of 3: 597 μs per loop
 ```
 
