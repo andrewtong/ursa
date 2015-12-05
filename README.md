@@ -1,4 +1,4 @@
-# ursa v3.1.2
+# ursa v3.1.3
 URSA is now functional for usage!
 
 A second project, URSA-enhanced is being worked on currently, with the focus of solving fuzzy string matches in linear time.
