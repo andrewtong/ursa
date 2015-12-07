@@ -265,5 +265,5 @@ def check_accuracy(words, substr, index, score):
     matcher = words[0:len(substr)]
     return {matcher:rating}
 
-#compare('A secondary fnctin comparescore can be used to exclusively retrieve the likeliness between two strings.', 'function')
-#print(score('A secondary fnctin comparescore can be used to exclusively retrieve the likeliness between two strings.', 'function'))
+#compare('A secondary fnctin compare can be used to exclusively retrieve the likeliness between two strings.', 'function')
+#print(score('A secondary fnctin compare can be used to exclusively retrieve the likeliness between two strings.', 'function'))
