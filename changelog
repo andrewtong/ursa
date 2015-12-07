@@ -1,4 +1,13 @@
-#v3.1.2
+#v3.1.3
+
+Changes from v3.1.2 to v3.1.3
+
+Reduction of function lengths to improve clarity.  New functions introduced to shorten overall function lengths such that they
+can be much more easily read.
+
+Variable/Function names altered to improve readability and to be more alligned with Python standards.
+
+Sample usage added in commented text within code.
 
 Changes from v3.1.1 to v3.1.2
 
